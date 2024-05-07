@@ -1,17 +1,15 @@
 # MNIST Digits Classification
 
-This project offers a solution for classifying MNIST handwritten digits using a Convolutional Neural Network (CNN) and PyTorch.
+This project offers a solution for classifying MNIST handwritten digits using a Convolutional Neural Network (CNN) and PyTorch. 
 
 ## Setup
 
-Clone the project repository using the following command:
+Clone the project repository  & create a virtual environment and install the required packages using Pip
 
 ```
-git clone https://github.com/trakru/mnist-prod-ml
-
+pip install -r requirements.txt
 ```
-
-Create a virtual environment and install the required packages using Conda
+Alternatively conda can also be used
 
 ```
 conda env create -f environment.yml
@@ -81,15 +79,6 @@ In addition to the model file, the `saved_models` directory also contains a `mod
 ## Deployment
 
 The project currently employs `FAST API` coupled with Uvicorn for inference deployment which admittedly is a toy deployment.
-
-### Note on CUDA with Package Managers (Pip/Conda)
-##### a.k.a. Why do we have both requirements.txt & environment.yml in the source repo
-
-For local installs only
-
-`CUDA` tends to not play nice with `pip` based installs. The recommended resolution is to create conda environments by running `conda env create -f environment.yml`. Alternatively, if we still would want to use pip, use the following to get torch installed `pip install --upgrade --force-reinstall torch==2.0.1+cu117 --index-url https://download.pytorch.org/whl/cu117` (Note: the version of `CUDA` depends on your graphics card)
-
-Cloud-based workflows are not impacted. Just use one of the pre-configured images with PyTorch & CUDA enabled
 
 ## References
 None yet.
