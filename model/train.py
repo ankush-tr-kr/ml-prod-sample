@@ -4,8 +4,6 @@ network module and the data loaders from the preprocess module. The hyperparamet
 using Optuna.
 """
 
-from datetime import datetime
-
 import optuna
 import torch
 from torch import nn, optim

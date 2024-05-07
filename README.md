@@ -23,7 +23,7 @@ Activate the environment
 conda activate conda-cuda
 ```
 
-## Usage  
+## Usage
 ### Local Training
 
 Utilize the `run.py` script to initiate the training process locally. This script optimizes the model using the `Optuna` framework and saves the best model to the `saved_models` directory.
@@ -81,7 +81,7 @@ In addition to the model file, the `saved_models` directory also contains a `mod
 ## Deployment
 
 The project currently employs `FAST API` coupled with Uvicorn for inference deployment which admittedly is a toy deployment.
- 
+
 ### Note on CUDA with Package Managers (Pip/Conda)
 ##### a.k.a. Why do we have both requirements.txt & environment.yml in the source repo
 
