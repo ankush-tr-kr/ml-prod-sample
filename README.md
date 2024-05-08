@@ -32,8 +32,8 @@ The same project structure is expected when setting up an AWS Sagemaker project 
 - cloud bucket storage (e.g. S3, GCS, etc.)
 - identifying compute resources and expressing them as code (e.g. ml.m4.xlarge)
 - The estimator used to run the training job (e.g. `PyTorch` estimator in `AWS Sagemaker SDK`)
-- the hyperparameter tuning framework being used right now is `optuna`. However, this can be replaced with in-built estimators in `AWS Sagemaker SDK` or other frameworks like `ray` or `hyperopt`
-- the inference is being deployed via `FAST API` using `uvicorn`, but in reality this can be replaced with any other framework including having a potential serverless architechture with `AWS Lambda`
+- the hyperparameter tuning framework being used right now is `optuna`. However, this can be replaced with in-built estimators in `AWS Sagemaker SDK`, `Vertex AI` or other frameworks like `ray` or `hyperopt`
+- the inference is being deployed via `FAST API` using `uvicorn`, but in reality this can be replaced with any other framework 
 
 ## Network Architecture
 
