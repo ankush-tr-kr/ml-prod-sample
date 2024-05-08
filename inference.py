@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 
-import click
-import matplotlib.pyplot as plt
 import torch
 from model.network import MNISTClassifier
 from PIL import Image

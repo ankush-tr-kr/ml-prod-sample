@@ -1,7 +1,7 @@
 """
 this file is used to run the optuna study
 """
-import json
+
 from datetime import datetime
 
 import optuna
