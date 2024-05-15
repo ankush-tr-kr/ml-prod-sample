@@ -21,4 +21,4 @@ jobs:
         
       - name: Test Jfrog CLI
         run: |
-          jf rt ping
+          jf rt ping --url ${{ vars.JF_URL }} --access-token ${{ secrets.JF_ACCESS_TOKEN }}
