@@ -21,4 +21,4 @@ jobs:
         
       - name: Test Jfrog CLI
         run: |
-          jf rt ping --url=https://krogertechnology.jfrog.io --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+          jf rt ping --url=https://krogertechnology.jfrog.io/artifactory --access-token ${{ secrets.JF_ACCESS_TOKEN }}
