@@ -21,3 +21,11 @@ jobs:
       - name: Test Jfrog CLI
         run: |
           jf rt ping --url=https://krogertechnology.jfrog.io/artifactory --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+
+      - name: Pull Docker Image from Artifactory
+        run: |
+          jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/docker-remote/alpine/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+  
+      - name: Verify Docker Image Pull
+        run: |
+          docker images | grep alpine:latest
