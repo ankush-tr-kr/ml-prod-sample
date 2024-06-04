@@ -24,7 +24,7 @@ jobs:
 
       - name: Pull Docker Image from Artifactory
         run: |
-          jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/docker-remote/alpine/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+          jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
   
       - name: Verify Docker Image Pull
         run: |
