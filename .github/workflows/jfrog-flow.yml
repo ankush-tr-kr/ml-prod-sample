@@ -19,29 +19,19 @@ jobs:
 
     steps:
       - uses: jfrog/setup-jfrog-cli@v4
-        # env:
-        #   JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
 
       - name: 🐸 Configure JFrog CLI
         run: |
           jfrog config add --url=${JF_URL} --user=${ART_SAAS_USER} --password=${JFROG_SAAS_TOKEN_VALUE} --interactive=false artifactorySaaS
         
-      # - name: Configures JFROG
-      #   run: |
-      #     jfrog config add --artifactory-url=https://https://krogertechnology.jfrog.io/ --user=${{ secrets.ART_SAAS_USER }} --password=${{ secrets.ART_SAAS_PASSWORD }} --interactive=false
-
-        
+            
       - name: Test Jfrog CLI
         run: |
           jf rt ping
-          
-      # - name: echo Access token
-      #   run: |
-      #     echo ${{ secrets.JF_ACCESS_TOKEN }}
 
-      # - name: Pull Docker Image from Artifactory
-      #   run: |
-      #     # jf docker pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+      - name: Pull Docker Image from Artifactory
+        run: |
+          jf docker pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest
       #     # jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
       #     # docker pull krogertechnology-docker.jfrog.io/<DOCKER_IMAGE>:<DOCKER_TAG>
           
