@@ -1,37 +1,71 @@
-name: Jfrog Login Auth workflow
+# name: Jfrog Login Auth workflow
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: jfrog/setup-jfrog-cli@v4
+#         env:
+#           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
+        
+#       - name: Test Jfrog CLI
+#         run: |
+#           jf rt ping --url=https://krogertechnology.jfrog.io/artifactory --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+
+#       # - name: echo Access token
+#       #   run: |
+#       #     echo ${{ secrets.JF_ACCESS_TOKEN }}
+
+#       - name: Pull Docker Image from Artifactory
+#         run: |
+#           jf docker pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+#           # jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
+#           # docker pull krogertechnology-docker.jfrog.io/<DOCKER_IMAGE>:<DOCKER_TAG>
+          
+#       - name: Verify Docker Image Pull
+#         run: |
+#           docker images | grep alpine:latest
+
+
+name: "JFrog CLI Example"
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: jfrog/setup-jfrog-cli@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup JFrog CLI
+        uses: jfrog/setup-jfrog-cli@v4
         env:
+          # JFrog platform url (for example: https://acme.jfrog.io)
+          JF_URL: ${{ secrets.JF_URL }}
+
+          # JFrog Platform access token
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        
-      - name: Test Jfrog CLI
-        run: |
-          jf rt ping --url=https://krogertechnology.jfrog.io/artifactory --access-token ${{ secrets.JF_ACCESS_TOKEN }}
 
-      - name: echo Access token
-        run: |
-          echo ${{ secrets.JF_ACCESS_TOKEN }}
+          # Basic authentication credentials
+          # JF_USER: ${{ secrets.JF_USER }}
+          # JF_PASSWORD: ${{ secrets.JF_PASSWORD }}
 
-      - name: Pull Docker Image from Artifactory
+      - name: Run JFrog CLI
         run: |
-          jf docker pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --access-token ${{ secrets.JF_ACCESS_TOKEN }}
-          # jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
-          # docker pull krogertechnology-docker.jfrog.io/<DOCKER_IMAGE>:<DOCKER_TAG>
-          
-      - name: Verify Docker Image Pull
-        run: |
-          docker images | grep alpine:latest
+          # Ping the server
+          jf rt ping
+          # Collect environment variables for the build
+          jf rt bce
+          # Collect VCS details from git and add them to the build
+          jf rt bag
+          # Publish build info
+          jf rt bp
