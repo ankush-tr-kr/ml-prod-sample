@@ -31,7 +31,7 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
-        echo "[global]" > pip.conf
+        echo "[global]" > ~/.pip/pip.conf
         # echo "index-url = https://${ART_SAAS_USER}@${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> pip.conf
         echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> pip.conf
         pip3 install -r requirements.txt
