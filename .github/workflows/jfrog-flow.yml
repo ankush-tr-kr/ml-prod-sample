@@ -29,9 +29,9 @@ jobs:
         run: |
           jf rt ping
 
-      - name: Pull Docker Image from Artifactory
-        run: |
-          jf rt docker-pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --user=${ART_SAAS_USER} --password=${JFROG_SAAS_TOKEN_VALUE} --interactive=false
+      # - name: Pull Docker Image from Artifactory
+      #   run: |
+          # jf rt docker-pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --user=${ART_SAAS_USER} --password=${JFROG_SAAS_TOKEN_VALUE} --interactive=false
       #     # jf rt docker-pull docker-remote/alpine:latest --url=https://krogertechnology.jfrog.io/artifactory/ --access-token ${{ secrets.JF_ACCESS_TOKEN }}
       #     # docker pull krogertechnology-docker.jfrog.io/<DOCKER_IMAGE>:<DOCKER_TAG>
           
