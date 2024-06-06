@@ -20,6 +20,7 @@ jobs:
         ART_SAAS_USER: ${{ secrets.ART_SAAS_USER }}
         JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
         JF_URL: ${{ vars.JF_URL}}
+        PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
   
 
     steps:
@@ -35,7 +36,7 @@ jobs:
         # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         #               python -m pip install --upgrade pip
         echo "[global]" > pip.conf
-        echo "index-url = https://${{ secrets.ART_SAAS_USER }}@${{ secrets.JFROG_SAAS_TOKEN_VALUE }}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> pip.conf
+        echo "index-url = https://${ART_SAAS_USER}@${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> pip.conf
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
