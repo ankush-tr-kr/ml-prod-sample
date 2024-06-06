@@ -20,7 +20,7 @@ jobs:
         
       - name: Configures JFROG
         run: |
-          jfrog config add --artifactory-url=https://https://krogertechnology.jfrog.io/artifactory --user=${{ secrets.ART_SAAS_USER }} --password=${{ secrets.ART_SAAS_PASSWORD }} --interactive=false
+          jfrog config add --artifactory-url=https://https://krogertechnology.jfrog.io/ --user=${{ secrets.ART_SAAS_USER }} --password=${{ secrets.ART_SAAS_PASSWORD }} --interactive=false
 
         
       - name: Test Jfrog CLI
