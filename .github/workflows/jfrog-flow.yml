@@ -17,10 +17,14 @@ jobs:
       - uses: jfrog/setup-jfrog-cli@v4
         env:
           JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
-        
-      - name: Configures JFROG
+
+      - name: 🐸 Configure JFrog CLI
         run: |
-          jfrog config add --artifactory-url=https://https://krogertechnology.jfrog.io/ --user=${{ secrets.ART_SAAS_USER }} --password=${{ secrets.ART_SAAS_PASSWORD }} --interactive=false
+          jfrog config add --url=https://krogertechnology.jfrog.io --user=${{ secrets.ART_SAAS_USER }} --password=${{ secrets.JFROG_SAAS_TOKEN_VALUE }} --interactive=false artifactorySaaS
+        
+      # - name: Configures JFROG
+      #   run: |
+      #     jfrog config add --artifactory-url=https://https://krogertechnology.jfrog.io/ --user=${{ secrets.ART_SAAS_USER }} --password=${{ secrets.ART_SAAS_PASSWORD }} --interactive=false
 
         
       - name: Test Jfrog CLI
