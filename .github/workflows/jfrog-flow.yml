@@ -22,6 +22,10 @@ jobs:
         run: |
           jf rt ping --url=https://krogertechnology.jfrog.io/artifactory --access-token ${{ secrets.JF_ACCESS_TOKEN }}
 
+      - name: echo Access token
+        run: |
+          echo ${{ secrets.JF_ACCESS_TOKEN }}
+
       - name: Pull Docker Image from Artifactory
         run: |
           jf docker pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --access-token ${{ secrets.JF_ACCESS_TOKEN }}
