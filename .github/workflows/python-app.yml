@@ -33,7 +33,7 @@ jobs:
       run: |
         echo "[global]" > pip.conf
         # echo "index-url = https://${ART_SAAS_USER}@${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> pip.conf
-        echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple >> pip.conf
+        echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> pip.conf
         pip3 install -r requirements.txt
     - name: Lint with flake8ß
       run: |
