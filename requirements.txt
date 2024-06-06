@@ -1,13 +1,13 @@
-torch
-torchvision
-onnx
-optuna
-optuna-dashboard
-optuna-fast-fanova
-gunicorn
-pytest
-pylint
-pre-commit
+# torch
+# torchvision
+# onnx
+# optuna
+# optuna-dashboard
+# optuna-fast-fanova
+# gunicorn
+# pytest
+# pylint
+# pre-commit
 kayday
 
 # dependency resolution for torch with cuda using pip
