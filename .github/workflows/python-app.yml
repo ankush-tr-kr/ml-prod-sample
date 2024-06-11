@@ -21,7 +21,7 @@ jobs:
         JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
         JF_URL: ${{ vars.JF_URL}}
         PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
-  
+
 
     steps:
     - uses: actions/checkout@v4
@@ -39,8 +39,9 @@ jobs:
       run: echo "$(<~/.pip/pip.conf)"
     - name: install requirements
       run: pip3 install -r requirements.txt
-    - name: Lint with flake8ß
+    - name: Lint with flake8
       run: |
+        pip3 install -r requirements-dev.txt
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide

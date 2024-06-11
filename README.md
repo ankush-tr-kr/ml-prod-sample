@@ -1,6 +1,6 @@
 # MNIST Digits Classification
 
-This project offers a solution for classifying MNIST handwritten digits using a Convolutional Neural Network (CNN) and PyTorch. 
+This project offers a solution for classifying MNIST handwritten digits using a Convolutional Neural Network (CNN) and PyTorch.
 
 ## Setup
 
@@ -33,7 +33,7 @@ The same project structure is expected when setting up an AWS Sagemaker project 
 - identifying compute resources and expressing them as code (e.g. ml.m4.xlarge)
 - The estimator used to run the training job (e.g. `PyTorch` estimator in `AWS Sagemaker SDK`)
 - the hyperparameter tuning framework being used right now is `optuna`. However, this can be replaced with in-built estimators in `AWS Sagemaker SDK`, `Vertex AI` or other frameworks like `ray` or `hyperopt`
-- the inference is being deployed via `FAST API` using `uvicorn`, but in reality this can be replaced with any other framework 
+- the inference is being deployed via `FAST API` using `uvicorn`, but in reality this can be replaced with any other framework
 
 ## Network Architecture
 
