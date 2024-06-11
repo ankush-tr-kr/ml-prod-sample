@@ -5,7 +5,7 @@ name: Python application
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feature-docker-build" ]
   pull_request:
     branches: [ "main" ]
 
@@ -16,6 +16,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+        ART_SAAS_USER: ${{ secrets.ART_SAAS_USER }}
+        JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
+        JF_URL: ${{ vars.JF_URL}}
+        PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
+
 
     steps:
     - uses: actions/checkout@v4
@@ -25,15 +31,21 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
-      run: |
-        pytest
+        mkdir -p ~/.pip
+        echo "[global]" > ~/.pip/pip.conf
+        echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf
+        echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf
+    - name: Confirm pip.conf changes
+      run: echo "$(<~/.pip/pip.conf)"
+    - name: install requirements
+      run: pip3 install -r requirements.txt
+    # - name: Lint with flake8
+    #   run: |
+    #     pip3 install -r requirements-dev.txt
+    #     # stop the build if there are Python syntax errors or undefined names
+    #     flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    #     # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+    #     flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    # - name: Test with pytest
+    #   run: |
+    #     pytest

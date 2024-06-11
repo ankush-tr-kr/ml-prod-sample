@@ -1,7 +1,7 @@
 """
 This module defines a function to train a CNN model using the network architecture in the
-network module and the data loaders from the preprocess module. The hyperparameters are optimized
-using Optuna.
+network module and the data loaders from the preprocess module. The hyperparameters
+are optimized using Optuna.
 """
 
 import optuna
@@ -17,15 +17,17 @@ from .train_utils import train_model
 # pylint: disable=no-member
 def objective(trial):
     """
-    Objective function for Optuna to optimize. This function is called by Optuna with different
-    hyperparameter values and returns the validation accuracy of the model trained with those
-    hyperparameters.
+    Objective function for Optuna to optimize. This function is called by 
+    Optuna with different hyperparameter values and returns the validation 
+    accuracy of the model trained with those hyperparameters.
 
     Args:
-        trial (optuna.Trial): Optuna object that stores the hyperparameters to be optimized.
+        trial (optuna.Trial): Optuna object that stores the hyperparameters 
+        to be optimized.
 
     Returns:
-        float: Validation accuracy of the model trained with the hyperparameters.
+        float: Validation accuracy of the model trained with the 
+        hyperparameters.
 
     """
 

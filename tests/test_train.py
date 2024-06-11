@@ -1,5 +1,5 @@
 # this is not the right way to test the objective function
-# in production scenarios, we would want to import the 
+# in production scenarios, we would want to import the
 # objective function from the model.train module
 # from model.train import objective
 
