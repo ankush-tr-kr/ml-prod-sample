@@ -33,8 +33,9 @@ jobs:
       run: |
         mkdir -p ~/.pip
         echo "[global]" > ~/.pip/pip.conf
-        echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" > pip.conf
-        cat ~/.pip/pip.conf
+        echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf
+        echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf
+        # cat ~/.pip/pip.conf
         # pip3 install -r requirements.txt
     - name: Confirm pip.conf changes
       run: echo "$(<~/.pip/pip.conf)"
