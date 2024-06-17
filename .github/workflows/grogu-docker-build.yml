@@ -1,14 +1,16 @@
-name: '🐳 🏗 Build Docker Image'
+name: '🐳 🏗 Build Docker, Image'
 
 on:
   push:
-    branches: [ "main", "feature-docker-build" ]
+    branches:
+      - main
+      - feature-docker-build
     tags:
       - '*'
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
     types: [opened, synchronize, reopened, labeled]
-    labels: [ "canary" ]
 
 permissions:
   contents: read
