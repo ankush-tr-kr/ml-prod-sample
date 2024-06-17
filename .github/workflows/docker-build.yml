@@ -1,6 +1,10 @@
 name: Build Docker Image
 
 on:
+  push:
+    branches:
+      - main
+      - feature/docker-build
   workflow_call:
     inputs:
       tag:
