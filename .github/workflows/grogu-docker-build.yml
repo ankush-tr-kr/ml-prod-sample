@@ -1,47 +1,47 @@
-name: '🐳 🏗 Build Docker, Image'
+# name: '🐳 🏗 Build Docker, Image'
 
-on:
-  push:
-    branches:
-      - '*'
-      - main
-      - feature-*
-      - feature*
-    tags:
-      - '*'
-  pull_request:
-    branches:
-      - main
-    types: [opened, synchronize, reopened, labeled]
+# on:
+#   push:
+#     branches:
+#       - '*'
+#       - main
+#       - feature-*
+#       - feature*
+#     tags:
+#       - '*'
+#   pull_request:
+#     branches:
+#       - main
+#     types: [opened, synchronize, reopened, labeled]
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-jobs:
-  build:
-    runs-on: [self-hosted, tsa]
-    env:
-      ART_SAAS_USER: ${{ secrets.ART_SAAS_USER }}
-      JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
-      JF_URL: ${{ vars.JF_URL }}
-    steps:
-      - name: Checkout Your Repo
-        uses: actions/checkout@v3
+# jobs:
+#   build:
+#     runs-on: [self-hosted, tsa]
+#     env:
+#       ART_SAAS_USER: ${{ secrets.ART_SAAS_USER }}
+#       JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
+#       JF_URL: ${{ vars.JF_URL }}
+#     steps:
+#       - name: Checkout Your Repo
+#         uses: actions/checkout@v3
 
-      - name: Run Docker Build
-        uses: krogertechnology/grogu/actions/run-docker-build@v2
-        with:
-          image: krogertechnology-docker.jfrog.io/docker-test/docker-test/alpine:${{ github.sha }}
-          context: .
-          push: true
-          labels-vendor: 'Kroger Technology'
-          jfrog-username: ${{ secrets.ART_SAAS_USER }}
-          jfrog-password: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
-          build-args: 'arg1=value1,arg2=value2'
+#       - name: Run Docker Build
+#         uses: krogertechnology/grogu/actions/run-docker-build@v2
+#         with:
+#           image: krogertechnology-docker.jfrog.io/docker-test/docker-test/alpine:${{ github.sha }}
+#           context: .
+#           push: true
+#           labels-vendor: 'Kroger Technology'
+#           jfrog-username: ${{ secrets.ART_SAAS_USER }}
+#           jfrog-password: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
+#           build-args: 'arg1=value1,arg2=value2'
 
-      - name: Additional Docker Commands
-        run: |
-          docker push krogertechnology-docker.jfrog.io/docker-test/docker-test/alpine:${{ github.sha }}
-        env:
-          JFROG_USERNAME: ${{ secrets.ART_SAAS_USER }}
-          JFROG_PASSWORD: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
+#       - name: Additional Docker Commands
+#         run: |
+#           docker push krogertechnology-docker.jfrog.io/docker-test/docker-test/alpine:${{ github.sha }}
+#         env:
+#           JFROG_USERNAME: ${{ secrets.ART_SAAS_USER }}
+#           JFROG_PASSWORD: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
