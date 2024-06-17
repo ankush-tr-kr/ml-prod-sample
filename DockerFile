@@ -1,0 +1,14 @@
+FROM alpine:latest
+
+RUN apk --no-cache add \
+    ca-certificates \
+    curl \
+    tar \
+    xz \
+    openssl
+
+WORKDIR /app
+
+COPY docker-project-dir /app
+
+CMD ["./run.sh"]
