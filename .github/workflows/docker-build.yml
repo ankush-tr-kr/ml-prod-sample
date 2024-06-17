@@ -1,0 +1,36 @@
+name: Build Docker Image
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+    secrets:
+      ART_SAAS_USER:
+        required: true
+      JFROG_SAAS_TOKEN_VALUE:
+        required: true
+
+env:
+  DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
+  DOCKER_FILE: ./Dockerfile
+  DOCKER_IMAGE_NAME: ct-recommendos/alpine
+
+jobs:
+  Build-Docker:
+    runs-on: [self-hosted, kubernetes]
+    name: Build-Docker-Image
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v2
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ secrets.ART_SAAS_USER }}
+          password: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
+      - name: Build and push Docker Image
+        run: |
+          echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ inputs.tag }}"
+          docker build -f "${{ env.DOCKER_FILE }}" -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ inputs.tag }}" .
+          docker push "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ inputs.tag }}"
