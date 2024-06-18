@@ -38,6 +38,7 @@ jobs:
           # echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ inputs.tag }}"
           # docker build -f "${{ env.DOCKER_FILE }}" -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ inputs.tag }}" .
           # docker push "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ inputs.tag }}"
+          echo "starting now"
           echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest"
           docker build -f "${{ env.DOCKER_FILE }}" -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest" .
           docker push "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest"
