@@ -19,7 +19,7 @@ on:
 env:
   DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
   DOCKER_FILE: ./Dockerfile
-  DOCKER_IMAGE_NAME: ct-recommendos/alpine
+  DOCKER_IMAGE_NAME: pzn-reco-sys/alpine
 
 jobs:
   Build-Docker:
