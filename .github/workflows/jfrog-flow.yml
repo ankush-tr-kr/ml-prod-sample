@@ -24,11 +24,14 @@ jobs:
         run: |
           jfrog config add --url=${JF_URL} --user=${ART_SAAS_USER} --password=${JFROG_SAAS_TOKEN_VALUE} --interactive=false artifactorySaaS
 
-
       - name: Test Jfrog CLI
         run: |
           jf rt ping
 
+      # - name: Build Docker Image
+      #   run: |
+      #    jf rt docker-build. --user=${ART_SAAS_USER} --password=${JFROG_SAAS_TOKEN_VALUE} --interactive=false
+         
       # - name: Pull Docker Image from Artifactory
       #   run: |
           # jf rt docker-pull krogertechnology-docker-hub.jfrog.io/amd64/alpine:latest --user=${ART_SAAS_USER} --password=${JFROG_SAAS_TOKEN_VALUE} --interactive=false

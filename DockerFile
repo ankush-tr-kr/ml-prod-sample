@@ -1,0 +1,23 @@
+FROM alpine:latest
+
+RUN apk --no-cache add \
+    ca-certificates \
+    curl \
+    tar \
+    xz \
+    openssl \
+    python3 \
+    py3-pip
+
+
+
+RUN python3 -m venv .venv \
+&& source .venv/bin/activate \
+&& pip install numpy \
+&& deactivate
+
+WORKDIR /app
+
+COPY docker-project-dir /app
+
+CMD ["./run.sh"]
