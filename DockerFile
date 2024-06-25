@@ -12,4 +12,5 @@ RUN echo "[global]" > ~/.pip/pip.conf
 RUN echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf
 RUN echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf
 RUN echo "$(<~/.pip/pip.conf)"
-RUN pip install -r requirements-build.txt
+RUN cat ~/.pip/pip.conf
+RUN pip3 install --verbose -r requirements-build.txt
