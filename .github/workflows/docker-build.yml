@@ -19,7 +19,7 @@ on:
 env:
   DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
   DOCKER_FILE: ./DockerFile
-  DOCKER_IMAGE_NAME: pzn-reco-sys/alpine
+  DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-pytorch
 
 jobs:
   Build-Docker:

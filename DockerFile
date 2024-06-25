@@ -1,4 +1,5 @@
-FROM nvcr.io/nvidia/merlin/merlin-pytorch:23.12
+# FROM nvcr.io/nvidia/merlin/merlin-pytorch:23.12
+FROM krogertechnology-docker.jfrog.io/merlin-pytorch:23.12
 
 # Add the requirements.txt file
 
