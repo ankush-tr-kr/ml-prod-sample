@@ -1,10 +1,16 @@
-# FROM nvcr.io/nvidia/merlin/merlin-pytorch:23.12
-FROM krogertechnology-docker.jfrog.io/merlin-pytorch:23.12
+FROM nvcr.io/nvidia/merlin/merlin-pytorch:23.12
+# FROM krogertechnology-docker.jfrog.io/merlin-pytorch:23.12
 
 # Add the requirements.txt file
 
 COPY requirements-build.txt ./requirements-build.txt
 
 # install the requirements
+RUN mkdir -p ~/.pip \
+    echo "[global]" > ~/.pip/pip.conf \
+    echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf \
+    echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf
+
+RUN echo "$(<~/.pip/pip.conf)"
 
 RUN pip install -r requirements-build.txt

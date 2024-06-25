@@ -19,6 +19,9 @@ on:
 env:
   DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
   DOCKER_FILE: ./DockerFile
+  ART_SAAS_USER: ${{ secrets.ART_SAAS_USER }}
+  JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
+  PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
   DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-pytorch
 
 jobs:
