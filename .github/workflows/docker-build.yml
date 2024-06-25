@@ -15,6 +15,8 @@ on:
         required: true
       JFROG_SAAS_TOKEN_VALUE:
         required: true
+      PYPI_IDENTITY_TOKEN:
+        required: true
 
 env:
   DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
