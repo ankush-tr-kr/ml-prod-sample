@@ -6,10 +6,11 @@ FROM nvcr.io/nvidia/merlin/merlin-pytorch:23.12
 COPY requirements-build.txt ./requirements-build.txt
 
 # install the requirements
-RUN mkdir -p ~/.pip \
-    echo "[global]" > ~/.pip/pip.conf \
-    echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf \
-    echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf
+RUN mkdir -p ~/.pip 
+RUN ls -al ~/.pip
+RUN echo "[global]" > ~/.pip/pip.conf
+RUN echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf \
+RUN echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf
 
 RUN echo "$(<~/.pip/pip.conf)"
 
