@@ -42,5 +42,5 @@ jobs:
         run: |
           echo "starting now"
           echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}"
-          docker build -f "${{ env.DOCKER_FILE }}" -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}" .
+          docker build -f "${{ env.DOCKER_FILE }}" --build-arg ART_SAAS_USER=${{ secrets.ART_SAAS_USER }} PYPI_IDENTITY_TOKEN=${{ secrets.PYPI_IDENTITY_TOKEN }}-t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}" .
           # docker push "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}"
