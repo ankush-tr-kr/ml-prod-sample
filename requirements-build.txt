@@ -1,2 +1,5 @@
 # gsutil
-kayday
+effodata
+effodata_clickstream
+gsutil
+google-cloud-cli
