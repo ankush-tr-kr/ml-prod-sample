@@ -1,0 +1,6 @@
+# gsutil
+effodata
+effodata_clickstream
+gsutil
+# google-cloud-cli
+kayday
