@@ -2,4 +2,5 @@
 effodata
 effodata_clickstream
 gsutil
-google-cloud-cli
+# google-cloud-cli
+kayday
