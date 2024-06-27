@@ -32,6 +32,13 @@ jobs:
     name: Build-Docker-Image
 
     steps:
+      - name: clear unnecessary files
+        run: |
+          sudo rm -rf /usr/share/dotnet \
+          && sudo rm -rf /opt/ghc \
+          && sudo rm -rf "/usr/local/share/boost" \ 
+          && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 #fetching tags
@@ -45,7 +52,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          RELEASE_BRANCHES: "feature/image-build"
+          RELEASE_BRANCHES: "feature/merlin-pytorch-build"
           REPO_OWNER: ankush-tr-kr
       - name: Build and push Docker Image
         run: |
