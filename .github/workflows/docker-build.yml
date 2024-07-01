@@ -20,7 +20,7 @@ on:
 
 env:
   DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
-  DOCKER_FILE: ./dockerfile
+  DOCKER_FILE: ./DockerFile
   ART_SAAS_USERNAME: ${{ secrets.ART_SAAS_USERNAME }}
   JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
   PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
@@ -32,12 +32,12 @@ jobs:
     name: Build-Docker-Image
 
     steps:
-      - name: clear unnecessary files
-        run: |
-          sudo rm -rf /usr/share/dotnet \
-          && sudo rm -rf /opt/ghc \
-          && sudo rm -rf "/usr/local/share/boost" \
-          && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+      # - name: clear unnecessary files
+      #   run: |
+      #     sudo rm -rf /usr/share/dotnet \
+      #     && sudo rm -rf /opt/ghc \
+      #     && sudo rm -rf "/usr/local/share/boost" \
+      #     && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       - uses: actions/checkout@v4
         with:
