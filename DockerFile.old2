@@ -1,0 +1,18 @@
+# FROM nvcr.io/nvidia/merlin/merlin-pytorch:23.12 # removed because want to specify AMD64 architecture only
+# FROM krogertechnology-docker.jfrog.io/merlin-pytorch:23.12 # doesnt work
+FROM nvcr.io/nvidia/merlin/merlin-pytorch@sha256:9114bb00405302ee22027891c9ee4589899524ee87b1e06c448f8ccd9e6d11a0
+
+# # Add the requirements.txt file
+# COPY requirements-build.txt ./requirements-build.txt
+
+# # Provide Arguments
+# ARG ART_SAAS_USER
+# ARG PYPI_IDENTITY_TOKEN
+
+# # Add PYPI mirror details via pip.conf modification
+# RUN mkdir -p ~/.pip && \
+#     echo "[global]" > ~/.pip/pip.conf && \
+#     echo "index-url = https://${ART_SAAS_USER}:${PYPI_IDENTITY_TOKEN}@krogertechnology.jfrog.io/artifactory/api/pypi/8451-python-remote/simple" >> ~/.pip/pip.conf && \
+#     echo "extra-index-url = https://pypi.org/simple" >> ~/.pip/pip.conf && \
+#     cat ~/.pip/pip.conf && \
+#     pip install --verbose -r requirements-build.txt
