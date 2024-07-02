@@ -20,4 +20,4 @@ FROM ${BASE_IMAGE}
 #     cat ~/.pip/pip.conf && \
 #     pip install --verbose -r requirements-build.txt
 
-RUN python -c "import sys; print(sys.version_info)"
+# RUN python -c "import sys; print(sys.version_info)"
