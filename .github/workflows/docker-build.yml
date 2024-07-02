@@ -24,12 +24,21 @@ env:
   ART_SAAS_USERNAME: ${{ secrets.ART_SAAS_USERNAME }}
   JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
   PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
-  DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-pytorch
+  # DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-pytorch
 
 jobs:
   Build-Docker:
     runs-on: ubuntu-latest
     name: Build-Docker-Image
+    strategy:
+      matrix:
+        include:
+          - DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-pytorch
+            BASE_IMAGE: 'nvcr.io/nvidia/merlin/merlin-pytorch@sha256:9114bb00405302ee22027891c9ee4589899524ee87b1e06c448f8ccd9e6d11a0'
+          - DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-tensorflow
+            BASE_IMAGE: 'nvcr.io/nvidia/merlin/merlin-tensorflow@sha256:f5075863d69ca1cc0186745128a5d391c254e1a8e5b8fec710faf8646f307ace'
+          - DOCKER_IMAGE_NAME: pzn-reco-sys/tritonserver
+            BASE_IMAGE: 'nvcr.io/nvidia/tritonserver@sha256:b06edc7b86929a4b27dac213f3b41d3b9d9a940d45d33e261fccc5c5a8bfac18'
 
     steps:
       # - name: clear unnecessary files
@@ -59,7 +68,6 @@ jobs:
       - name: Build and push Docker Image
         run: |
           echo "starting now"
-          echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$VERSION"
-          # VERSION=$(git describe --tags --abbrev=0)
-          docker build -f "${{ env.DOCKER_FILE }}" --build-arg ART_SAAS_USERNAME=${{ secrets.ART_SAAS_USERNAME }} --build-arg PYPI_IDENTITY_TOKEN=${{ secrets.PYPI_IDENTITY_TOKEN }} -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$VERSION" .
-          docker push "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$VERSION"
+          echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ matrix.DOCKER_IMAGE_NAME }}:$VERSION"
+          docker build -f "${{ env.DOCKER_FILE }}" --build-arg BASE_IMAGE=${{ matrix.BASE_IMAGE }} --build-arg ART_SAAS_USERNAME=${{ secrets.ART_SAAS_USERNAME }} --build-arg PYPI_IDENTITY_TOKEN=${{ secrets.PYPI_IDENTITY_TOKEN }} -t "${{ env.DOCKER_REGISTRY }}/${{ matrix.DOCKER_IMAGE_NAME }}:$VERSION" .
+          docker push "${{ env.DOCKER_REGISTRY }}/${{ matrix.DOCKER_IMAGE_NAME }}:$VERSION"
