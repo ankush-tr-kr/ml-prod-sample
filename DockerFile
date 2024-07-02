@@ -2,7 +2,7 @@
 # FROM krogertechnology-docker.jfrog.io/merlin-pytorch:23.12 # doesnt work
 # FROM nvcr.io/nvidia/merlin/merlin-pytorch@sha256:9114bb00405302ee22027891c9ee4589899524ee87b1e06c448f8ccd9e6d11a0
 ARG BASE_IMAGE
-FROM ${BASE_IMAGE}}
+FROM ${BASE_IMAGE}
 
 
 # # Add the requirements.txt file
