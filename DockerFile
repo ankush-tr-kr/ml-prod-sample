@@ -4,6 +4,7 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
+RUN apt-get update && apt-get upgrade
 
 # # Add the requirements.txt file
 # COPY requirements-build.txt ./requirements-build.txt
