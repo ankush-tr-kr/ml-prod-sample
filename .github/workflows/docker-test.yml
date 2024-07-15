@@ -1,9 +1,8 @@
-name: Build Docker Image
+name: Verify OS Version in Docker Image
 
 on:
   push:
     branches:
-      # - main
       - test/debian
   workflow_call:
     inputs:
@@ -19,39 +18,28 @@ on:
         required: true
 
 env:
-  DOCKER_REGISTRY: krogertechnology-docker-test.jfrog.io
-  DOCKER_FILE: ./DockerFile.test
-  ART_SAAS_USER: ${{ secrets.ART_SAAS_USER }}
-  JFROG_SAAS_TOKEN_VALUE: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
-  PYPI_IDENTITY_TOKEN: ${{ secrets.PYPI_IDENTITY_TOKEN }}
-  DOCKER_IMAGE_NAME: pzn-reco-sys/merlin-pytorch
+  DOCKER_REGISTRY: krogertechnology-docker.jfrog.io
+  DOCKER_IMAGE_NAME: debian
 
 jobs:
-  Build-Docker:
+  verify-os-version:
     runs-on: ubuntu-latest
-    name: Build-Docker-Image
+    name: Verify OS Version
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 #fetching tags
+
       - uses: docker/login-action@v3
         with:
           registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ secrets.ART_SAAS_USER }}
           password: ${{ secrets.JFROG_SAAS_TOKEN_VALUE }}
-    #   - name: Semantic Versioning
-    #     uses: anothrNick/github-tag-action@1.67.0
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #       DEFAULT_BUMP: patch
-    #       RELEASE_BRANCHES: "feature/image-build"
-        #   REPO_OWNER: ankush-tr-kr
-      - name: Build and push Docker Image
+
+      - name: Run Docker container and check OS version
         run: |
-          echo "starting now"
-          echo "Building Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$VERSION"
-        #   VERSION=$(git describe --tags --abbrev=0)
-        #   docker build -f "${{ env.DOCKER_FILE }}" --build-arg ART_SAAS_USER=${{ secrets.ART_SAAS_USER }} --build-arg PYPI_IDENTITY_TOKEN=${{ secrets.PYPI_IDENTITY_TOKEN }} -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:$VERSION" .
-          # docker build -f "${{ env.DOCKER_FILE }}" --build-arg ART_SAAS_USER=${{ secrets.ART_SAAS_USER }} --build-arg PYPI_IDENTITY_TOKEN=${{ secrets.PYPI_IDENTITY_TOKEN }} -t "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}" .
-          # docker push "${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}"
+          echo "Pulling Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest"
+          docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          echo "Running Docker container to check OS version"
+          docker run --rm ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest cat /etc/os-release
