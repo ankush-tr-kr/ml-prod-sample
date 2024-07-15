@@ -19,8 +19,7 @@ on:
 
 env:
   DOCKER_REGISTRY: krogertechnology-docker.jfrog.io
-  DOCKER_IMAGE_NAME: debian
-
+  DOCKER_IMAGE_NAME: debian@sha256
 jobs:
   verify-os-version:
     runs-on: ubuntu-latest
@@ -39,7 +38,7 @@ jobs:
 
       - name: Run Docker container and check OS version
         run: |
-          echo "Pulling Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest"
-          docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          echo "Pulling Docker image ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}"
+          docker pull ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:820a611dc036cb57cee73613ce9da12530435b03007578153c04622e7f03f19b
           echo "Running Docker container to check OS version"
-          docker run --rm ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:latest cat /etc/os-release
+          docker run --rm ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE_NAME }}:820a611dc036cb57cee73613ce9da12530435b03007578153c04622e7f03f19b cat /etc/os-release
