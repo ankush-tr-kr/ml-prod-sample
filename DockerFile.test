@@ -1,0 +1,3 @@
+FROM krogertechnology-docker.jfrog.io/debian:latest
+
+RUN cat /etc/os-release
