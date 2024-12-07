@@ -1,0 +1,23 @@
+[
+  {
+    "name": "ip-cr-sci-mgmt-registry-api-dev",
+    "address": "10.24.112.14",
+    "region": "us-central1",
+    "type": "static",
+    "status": "IN_USE"
+  },
+  {
+    "name": "ip-online-optimized-fs-dev",
+    "address": "10.24.112.16",
+    "region": "us-central1",
+    "type": "static",
+    "status": "IN_USE"
+  },
+  {
+    "name": "ip-online-prediction-ep-lb-dev",
+    "address": "10.24.112.30",
+    "region": "us-central1",
+    "type": "static",
+    "status": "IN_USE"
+  }
+]
